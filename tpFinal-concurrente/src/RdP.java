@@ -1,6 +1,6 @@
 public class RdP {
-    int[][] incidencia;
-    int[] marca;
+    private final int[][] incidencia;
+    private int[] marca;
 
     public RdP() {
         incidencia = new int[][]{{0,1,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -27,7 +27,18 @@ public class RdP {
 
     }
 
-    private int[] multiply(int[] b) {
+    // Metodo que se le pasa el vector de disparo y actualiza la marca
+    // Se debe verificar que el disparo se puede realizar previamente
+
+    public boolean dispararTransicion(int t) {
+        for(int i = 0; i < marca.length; i++){
+            int a = incidencia[i][t] + marca[i];
+            if(a < 0){return false;}
+        }
+
+        int[] b = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  // tiene 17 ceros
+        b[t] = 1;  // seteamos el 1 en la transicion que se quiere disparar
+
         int[] c = new int[incidencia.length];
         // se comprueba si las matrices se pueden multiplicar
         if (incidencia[0].length == b.length) {
@@ -38,9 +49,9 @@ public class RdP {
                 }
             }
         }
-        /**
-         * si no se cumple la condición se retorna una matriz vacía
-         */
-        return c;
+        for(int i = 0; i < marca.length; i++){
+            marca[i] += c[i];
+        }
+        return true;
     }
 }
