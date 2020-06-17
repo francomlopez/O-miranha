@@ -31,10 +31,7 @@ public class RdP {
     // Se debe verificar que el disparo se puede realizar previamente
 
     public boolean dispararTransicion(int t) {
-        for(int i = 0; i < marca.length; i++){
-            int a = incidencia[i][t] + marca[i];
-            if(a < 0){return false;}
-        }
+        if(!tHabilitada(t)){return false;}
 
         int[] b = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  // tiene 17 ceros
         b[t] = 1;  // seteamos el 1 en la transicion que se quiere disparar
@@ -54,4 +51,26 @@ public class RdP {
         }
         return true;
     }
+
+    public boolean tHabilitada(int t){
+        for(int i = 0; i < marca.length; i++){
+            int a = incidencia[i][t] + marca[i];
+            if(a < 0){return false;}
+        }
+        return true;
+    }
+
+    public int[] tHabilitadas(){
+        int[] c = new int[getCantTransiciones()];
+
+        for(int i = 0; i < getCantTransiciones(); i++){
+            if(tHabilitada(i)){c[i] = 1;}
+            else{c[i] = 0;}
+        }
+        return c;
+    }
+
+    public int getCantTransiciones(){return incidencia[0].length;}
+    public int getCantPlazas(){return incidencia.length;}
+    public int[] getMarca(){return marca;}
 }
