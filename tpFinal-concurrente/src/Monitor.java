@@ -9,7 +9,7 @@ public class Monitor {
 
 
     public Monitor() {
-        red = new RdP();
+        red = new RdP(this);
         mutex = new Semaphore(1);
         for(int i = 0; i < red.getCantTransiciones(); i++){
             colas[i] = new Semaphore(0);
@@ -24,9 +24,9 @@ public class Monitor {
             e.printStackTrace();
         }
 
-        boolean seDispara = red.dispararTransicion(t);  // en dispararTransicion falta implementar el tiempo
+        int seDispara = red.dispararTransicion(t);  // en dispararTransicion falta implementar el tiempo
 
-        if(seDispara){
+        if(seDispara == 0){
             int[] tHabs = red.tHabilitadas();
             int[] esperando = hayAlguien();
 
@@ -34,9 +34,11 @@ public class Monitor {
             for(int i = 0; i < red.getCantTransiciones(); i++){
                 disponible[i] = tHabs[i]*esperando[i];
             }
-            politica.cualDespierto(disponible);
+            int cual = politica.cualDespierto(disponible);
+            if(cual != -1){colas[cual].release();} // Despertamos al hilo que estaba en la cola para que intente nuevamente disparar
+            mutex.release();
         }
-        else{
+        else if(seDispara == 1){
             mutex.release();
             try {
                 colas[t].acquire();
@@ -44,8 +46,8 @@ public class Monitor {
                 e.printStackTrace();
             }
         }
-
-        return seDispara;
+        if (seDispara == 0) {return true;}
+        else {return false;}
     }
 
     public int[] hayAlguien(){
@@ -61,6 +63,8 @@ public class Monitor {
         }
         return c;
     }
+
+    public void releaseMutex() {mutex.release();}
 
 
 }

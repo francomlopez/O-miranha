@@ -1,7 +1,11 @@
+import java.util.Random;
+
 public class Politica {
     private RdP red;
+    private Random rand;
     public Politica(RdP red) {
         this.red = red;
+        rand = new Random();
     }
     public int cualDespierto(int[] c){
         // Primero se analizan las transiciones instantaneas y sus conflictos
@@ -44,8 +48,37 @@ public class Politica {
 
         // Fin de las transiciones instantaneas
 
+<<<<<<< HEAD
         //primero las de vaciado
+=======
+        //primero las de vaciado 
+        else if(c[15] == 1){return 15;}
+        else if(c[16] == 1){return 16;}
+        else if(c[5] == 1 && c[13] == 1){ //Siempre ambas transiciones estaran habilitadas al mismo tiempo
+            // Este caso es cuando finalizarT1P1 y procesarT2P1 estan habilitadas
 
+            if(rand.nextInt(2) == 0){  // hacemos un random para ver que transicion disparar
+                return 5;   // retorna el numero de la transicion finalizarTIP1
+            }
+            else{
+                return 13; // retorna el numero de transicion de procesarT2P1
+            }
+        }
+        else if(c[7] == 1 && c[14] == 1){ //Siempre ambas transiciones estaran habilitadas al mismo tiempo
+            // Este caso es cuando finalizarT1P2 y procesarT2P2 estan habilitadas
+>>>>>>> 3cde871a151bd0c6d14974befb23be59d923753c
+
+            if(rand.nextInt(2) == 0){  // hacemos un random para ver que transicion disparar
+                return 7;   // retorna el numero de la transicion finalizarTIP1
+            }
+            else{
+                return 14; // retorna el numero de transicion de procesarT2P1
+            }
+        }
+        else if(c[7] == 1){return 7;}
+        else if(c[8] == 1){return 8;}
+        else if(c[0] == 1){return 0;}
+        else{return -1;}
 
     }
 }
