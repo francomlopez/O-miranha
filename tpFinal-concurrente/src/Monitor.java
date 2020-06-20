@@ -14,7 +14,7 @@ public class Monitor {
         for(int i = 0; i < red.getCantTransiciones(); i++){
             colas[i] = new Semaphore(0);
         }
-        politica = new Politica();
+        politica = new Politica(red);
     }
 
     public boolean disparar(int t){
@@ -58,8 +58,8 @@ public class Monitor {
             else{
                 c[i] = 0;
             }
-
         }
+        return c;
     }
 
 

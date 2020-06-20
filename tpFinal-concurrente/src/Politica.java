@@ -29,7 +29,7 @@ public class Politica {
             }
         }
         else if(c[9] == 1){return 9;} // P1M1
-        else if(c[10] == 1){return[10];} // P1M2
+        else if(c[10] == 1){return 10;} // P1M2
         else if(c[11] == 1 && c[12] == 1){
             // Este caso es cuando P2M1 y P2M2 estan habilitadas
             if(red.getMarca()[3] > red.getMarca()[4]){  // si DisponibleM1 > DisponibleM2 (plazas)
@@ -44,7 +44,7 @@ public class Politica {
 
         // Fin de las transiciones instantaneas
 
-        //primero las de vaciado 
+        //primero las de vaciado
 
 
     }
