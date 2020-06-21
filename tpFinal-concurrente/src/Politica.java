@@ -16,7 +16,7 @@ public class Politica {
                 return 2;   // retorna el numero de la transicion asignaP2
             }
             else{
-                return 1; // retorna el numero de transicion de asignaP1
+                return 1; // retorna el numero de cualquier transicion
             }
         }
         else if(c[1] == 1){return 1;} // asignaP1
@@ -48,9 +48,9 @@ public class Politica {
 
         // Fin de las transiciones instantaneas
 
-<<<<<<< HEAD
+
         //primero las de vaciado
-=======
+
         //primero las de vaciado 
         else if(c[15] == 1){return 15;}
         else if(c[16] == 1){return 16;}
@@ -66,7 +66,7 @@ public class Politica {
         }
         else if(c[7] == 1 && c[14] == 1){ //Siempre ambas transiciones estaran habilitadas al mismo tiempo
             // Este caso es cuando finalizarT1P2 y procesarT2P2 estan habilitadas
->>>>>>> 3cde871a151bd0c6d14974befb23be59d923753c
+
 
             if(rand.nextInt(2) == 0){  // hacemos un random para ver que transicion disparar
                 return 7;   // retorna el numero de la transicion finalizarTIP1

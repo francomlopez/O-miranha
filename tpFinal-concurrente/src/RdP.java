@@ -6,18 +6,18 @@ public class RdP {
     private long[] alpha;
     private long beta;
     private Monitor monitor;
-    public RdP(Monitor m) {
+    public RdP() {
         incidencia = new int[][]{{0,1,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,1,0,-1,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                                {0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,1,0},
-                                {0,0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,1},
+                                {0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,4,0},
+                                {0,0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,4},
                                 {0,-1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,-1,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,0,0,0,1,0,1,0,-1,-1,0,0,0,0,0,0},
                                 {0,0,0,0,0,0,1,0,1,0,0,-1,-1,0,0,0,0},
-                                {0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-1,0},
-                                {0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-1},
+                                {0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-4,0},
+                                {0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-4},
                                 {-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,0,-1,0,0,0,0,0,1,1,0,0,0,0,0,0},
                                 {0,0,0,0,-1,0,0,0,0,0,0,1,1,0,0,0,0},
@@ -27,12 +27,12 @@ public class RdP {
                                 {0,0,0,0,0,0,0,-1,0,0,0,0,0,1,0,0,0},
                                 {0,0,0,0,0,0,0,0,-1,0,0,0,0,0,1,0,0}};
 
-        monitor = m;
         marca = new int[]{0,0,0,8,8,4,4,0,0,0,0,1,1,1,0,0,1,0,0};
         temporales = new boolean[]{true,false,false,false,false,true,true,true,true,false,false,false,false,true,true,true,true};
         tiempoInicial = new long[]{0,-1,-1,-1,-1,0,0,0,0,-1,-1,-1,-1,0,0,0,0};
-        alpha = new long[]{300,-1,-1,-1,-1,100,100,100,100,-1,-1,-1,-1,300,300,1500,1500};
-        beta = 10000;
+        alpha = new long[]{100,-1,-1,-1,-1,100,100,100,100,-1,-1,-1,-1,300,300,1500,1500};
+        beta = 300000;
+        actTimeStamps();
     }
 
     // Metodo que se le pasa el vector de disparo y actualiza la marca
@@ -44,7 +44,8 @@ public class RdP {
         if(esTemporal(t)){
             if(!checkVentana(t)) {
                 monitor.releaseMutex();
-                long nap = alpha[t] - (System.currentTimeMillis() + tiempoInicial[t]);
+                long actual = System.currentTimeMillis();
+                long nap = tiempoInicial[t] + alpha[t] - actual;
                 try {
                     Thread.currentThread().sleep(nap);
                 } catch (InterruptedException e) {
@@ -72,19 +73,13 @@ public class RdP {
             marca[i] += c[i];
         }
         // CAMBIOS A CONTADORES DE TRANSICIONES TEMPORALES
-        for(int i = 0;i<this.getCantTransiciones(); i++){
-            if(tHabilitada(i) && temporales[i]){
-                if(tiempoInicial[i] == 0){tiempoInicial[i] = System.currentTimeMillis();}
-            }
-            if(!tHabilitada(i) && temporales[i]){tiempoInicial[i] = 0;}
-        }
-
+        actTimeStamps();
         return 0;
     }
 
     private boolean checkVentana(int t) {
         long gap = System.currentTimeMillis() - tiempoInicial[t];
-        if(gap > alpha[ t] && gap < beta) {return true;}
+        if(gap > alpha[t] && gap < beta) {return true;}
         return false;
     }
 
@@ -110,4 +105,13 @@ public class RdP {
     public int getCantPlazas(){return incidencia.length;}
     public int[] getMarca(){return marca;}
     public boolean esTemporal(int t){return temporales[t];}
+    public void setMonitor(Monitor m){monitor = m;}
+    public void actTimeStamps(){
+        for(int i = 0;i<this.getCantTransiciones(); i++){
+            if(tHabilitada(i) && temporales[i]){
+                if(tiempoInicial[i] == 0){tiempoInicial[i] = System.currentTimeMillis();}
+            }
+            if(!tHabilitada(i) && temporales[i]){tiempoInicial[i] = 0;}
+        }
+    }
 }
