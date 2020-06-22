@@ -48,16 +48,11 @@ public class Politica {
 
         // Fin de las transiciones instantaneas
 
-
-        //primero las de vaciado
-        else if(c[15] == 1){return 15;}
-        else if(c[16] == 1){return 16;}
-
         //primero las de vaciado
         else if(c[5] == 1 && c[13] == 1){ //Siempre ambas transiciones estaran habilitadas al mismo tiempo
             // Este caso es cuando finalizarT1P1 y procesarT2P1 estan habilitadas
 
-            if(rand.nextInt(2) == 0){  // hacemos un random para ver que transicion disparar
+            if(Math.random() >= 0.5){  // hacemos un random para ver que transicion disparar
                 return 5;   // retorna el numero de la transicion finalizarTIP1
             }
             else{
@@ -68,7 +63,7 @@ public class Politica {
             // Este caso es cuando finalizarT1P2 y procesarT2P2 estan habilitadas
 
 
-            if(rand.nextInt(2) == 0){  // hacemos un random para ver que transicion disparar
+            if(Math.random() >= 0.5){  // hacemos un random para ver que transicion disparar
                 return 6;   // retorna el numero de la transicion finalizarTIP1
             }
             else{
@@ -78,6 +73,8 @@ public class Politica {
         else if(c[7] == 1){return 7;}
         else if(c[8] == 1){return 8;}
         else if(c[0] == 1){return 0;}
+        else if(c[15] == 1){return 15;}
+        else if(c[16] == 1){return 16;}
 
         else{return -1;}
 

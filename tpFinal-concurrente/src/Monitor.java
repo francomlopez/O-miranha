@@ -40,7 +40,6 @@ public class Monitor {
             int cual = politica.cualDespierto(disponible);
             if(cual != -1){colas[cual].release();} // Despertamos al hilo que estaba en la cola para que intente nuevamente disparar
             estadisticas.seDisparo(t);
-            System.out.println(red.marcaToString());
             mutex.release();
         }
         else if(seDispara == 1){

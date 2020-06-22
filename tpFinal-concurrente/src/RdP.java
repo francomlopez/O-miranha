@@ -30,7 +30,7 @@ public class RdP {
         marca = new int[]{0,0,0,8,8,4,4,0,0,0,0,1,1,1,0,0,1,0,0};
         temporales = new boolean[]{true,false,false,false,false,true,true,true,true,false,false,false,false,true,true,true,true};
         tiempoInicial = new long[]{0,-1,-1,-1,-1,0,0,0,0,-1,-1,-1,-1,0,0,0,0};
-        alpha = new long[]{50,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,8000,8000};
+        alpha = new long[]{50,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,500,500};
         beta = 300000;
         actTimeStamps();
     }
@@ -46,9 +46,8 @@ public class RdP {
                 monitor.releaseMutex();
                 long actual = System.currentTimeMillis();
                 long nap = tiempoInicial[t] + alpha[t] - actual;
-                System.out.println(t+":"+nap);
                 try {
-                    Thread.currentThread().sleep(nap);
+                    Thread.sleep(nap);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -96,7 +95,9 @@ public class RdP {
         int[] c = new int[getCantTransiciones()];
 
         for(int i = 0; i < getCantTransiciones(); i++){
-            if(tHabilitada(i)){c[i] = 1;}
+            if(tHabilitada(i)){
+                c[i] = 1;
+            }
             else{c[i] = 0;}
         }
         return c;
