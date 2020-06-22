@@ -1,3 +1,7 @@
+import javax.rmi.ssl.SslRMIClientSocketFactory;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +32,15 @@ public class Estadisticas {
         nombreT.put(14,"ProcesarT2P2");
         nombreT.put(15,"VaciadoM1");
         nombreT.put(16,"VaaciadoM2");
+
+        PrintStream out = null;
+        try {
+            out = new PrintStream(
+                    new FileOutputStream("log.txt", true), false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.setOut(out);
     }
 
     public void seDisparo(int t){
@@ -35,8 +48,10 @@ public class Estadisticas {
     }
 
     public void printDatos(){
+        System.out.println("================================================================================");
         for(int i = 0; i < disparos.length; i++){
             System.out.println("La transicion " + nombreT.get(i) + " se disparo: " + disparos[i] + " veces.");
         }
+        System.out.println("================================================================================");
     }
 }

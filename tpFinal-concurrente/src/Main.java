@@ -44,7 +44,7 @@ public class Main {
         }
         long tfinal = System.currentTimeMillis();
         monitor.getEstadisticas().printDatos();
-        System.out.println((tfinal-tinicial)/1000);
+        System.out.println("Tiempo de ejecucion: "(tfinal-tinicial)/1000 + " segundos.");
         System.exit(0);
     }
 }
