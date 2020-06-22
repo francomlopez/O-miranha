@@ -6,6 +6,7 @@ public class Monitor {
     private Semaphore mutex;
     private Semaphore[] colas;
     private Politica politica;
+    private Estadisticas estadisticas;
 
 
     public Monitor() {
@@ -16,6 +17,7 @@ public class Monitor {
             colas[i] = new Semaphore(0);
         }
         politica = new Politica(red);
+        estadisticas = new Estadisticas();
     }
 
     public boolean disparar(int t){
@@ -37,7 +39,8 @@ public class Monitor {
             }
             int cual = politica.cualDespierto(disponible);
             if(cual != -1){colas[cual].release();} // Despertamos al hilo que estaba en la cola para que intente nuevamente disparar
-            System.out.println("Se disparo la transicion"+t);
+            estadisticas.seDisparo(t);
+            System.out.println(red.marcaToString());
             mutex.release();
         }
         else if(seDispara == 1){
@@ -72,4 +75,5 @@ public class Monitor {
         return politica;
     }
     public RdP getRed(){ return red;}
+    public Estadisticas getEstadisticas(){return estadisticas;}
 }

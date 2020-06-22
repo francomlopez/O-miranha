@@ -30,7 +30,7 @@ public class RdP {
         marca = new int[]{0,0,0,8,8,4,4,0,0,0,0,1,1,1,0,0,1,0,0};
         temporales = new boolean[]{true,false,false,false,false,true,true,true,true,false,false,false,false,true,true,true,true};
         tiempoInicial = new long[]{0,-1,-1,-1,-1,0,0,0,0,-1,-1,-1,-1,0,0,0,0};
-        alpha = new long[]{100,-1,-1,-1,-1,100,100,100,100,-1,-1,-1,-1,300,300,1500,1500};
+        alpha = new long[]{50,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,8000,8000};
         beta = 300000;
         actTimeStamps();
     }
@@ -46,6 +46,7 @@ public class RdP {
                 monitor.releaseMutex();
                 long actual = System.currentTimeMillis();
                 long nap = tiempoInicial[t] + alpha[t] - actual;
+                System.out.println(t+":"+nap);
                 try {
                     Thread.currentThread().sleep(nap);
                 } catch (InterruptedException e) {
@@ -79,7 +80,7 @@ public class RdP {
 
     private boolean checkVentana(int t) {
         long gap = System.currentTimeMillis() - tiempoInicial[t];
-        if(gap > alpha[t] && gap < beta) {return true;}
+        if(gap >= alpha[t] && gap < beta) {return true;}
         return false;
     }
 
@@ -113,5 +114,14 @@ public class RdP {
             }
             if(!tHabilitada(i) && temporales[i]){tiempoInicial[i] = 0;}
         }
+    }
+    public String marcaToString(){
+        String marcaS = "[";
+        for(int i = 0; i< 18 ; i++){
+            marcaS += " " + marca[i] + ",";
+
+        }
+        marcaS += "]";
+        return marcaS;
     }
 }

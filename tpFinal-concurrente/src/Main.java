@@ -13,6 +13,7 @@ public class Main {
         monitor.getRed().setMonitor(monitor); // se le pasa el monitor a la red para que pueda hacer release al mutex
                                               // cuando se dispara fuera de la ventana de tiempo
 
+        long tinicial = System.currentTimeMillis();
 
         executor.execute(new ArrivalRate(monitor,0));  // arrivalRate
         executor.execute(new Tarea1T(monitor, 1)); // asignarP1
@@ -41,6 +42,9 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        long tfinal = System.currentTimeMillis();
+        monitor.getEstadisticas().printDatos();
+        System.out.println((tfinal-tinicial)/1000);
         System.exit(0);
     }
 }
