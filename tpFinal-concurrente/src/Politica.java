@@ -64,12 +64,12 @@ public class Politica {
                 return 13; // retorna el numero de transicion de procesarT2P1
             }
         }
-        else if(c[7] == 1 && c[14] == 1){ //Siempre ambas transiciones estaran habilitadas al mismo tiempo
+        else if(c[6] == 1 && c[14] == 1){ //Siempre ambas transiciones estaran habilitadas al mismo tiempo
             // Este caso es cuando finalizarT1P2 y procesarT2P2 estan habilitadas
 
 
             if(rand.nextInt(2) == 0){  // hacemos un random para ver que transicion disparar
-                return 7;   // retorna el numero de la transicion finalizarTIP1
+                return 6;   // retorna el numero de la transicion finalizarTIP1
             }
             else{
                 return 14; // retorna el numero de transicion de procesarT2P1
