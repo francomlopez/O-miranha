@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class RdP {
     private final int[][] incidencia;
     private int[] marca;
@@ -6,6 +8,10 @@ public class RdP {
     private long[] alpha;
     private long beta;
     private Monitor monitor;
+    private long tinicial;
+    private HashMap<Integer, String> nombreT;
+    private HashMap<Integer, String> nombreP;
+
     public RdP() {
         incidencia = new int[][]{{0,1,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,1,0,-1,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -33,6 +39,46 @@ public class RdP {
         alpha = new long[]{50,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,500,500};
         beta = 300000;
         actTimeStamps();
+        tinicial = System.currentTimeMillis();
+        nombreT = new HashMap<>();
+        nombreT.put(0,"ArrivalRate");
+        nombreT.put(1,"AsignaP1");
+        nombreT.put(2,"AsignaP2");
+        nombreT.put(3,"EmpezarP1");
+        nombreT.put(4,"EmpezarP2");
+        nombreT.put(5,"FinalizarT1P1");
+        nombreT.put(6,"FinalizarT1P2");
+        nombreT.put(7,"FinalizarT2P1");
+        nombreT.put(8,"FinalizarT2P2");
+        nombreT.put(9,"P1M1");
+        nombreT.put(10,"P1M2");
+        nombreT.put(11,"P2M1");
+        nombreT.put(12,"P2M2");
+        nombreT.put(13,"ProcesarT2P1");
+        nombreT.put(14,"ProcesarT2P2");
+        nombreT.put(15,"VaciadoM1");
+        nombreT.put(16,"VaaciadoM2");
+
+        nombreP = new HashMap<>();
+        nombreP.put(0,"ColaP1");
+        nombreP.put(1,"ColaP2");
+        nombreP.put(2,"ColaProcesos");
+        nombreP.put(3,"DisponibleM1");
+        nombreP.put(4,"DisponibleM2");
+        nombreP.put(5,"LimiteColaP1");
+        nombreP.put(6,"LimiteColaP2");
+        nombreP.put(7,"ListoP1");
+        nombreP.put(8,"ListoP2");
+        nombreP.put(9,"M1");
+        nombreP.put(10,"M2");
+        nombreP.put(11,"P0");
+        nombreP.put(12,"ProcesadorP1");
+        nombreP.put(13,"ProcesadorP2");
+        nombreP.put(14,"ProcesandoP1");
+        nombreP.put(15,"ProcesandoP2");
+        nombreP.put(16,"RecursoTareas");
+        nombreP.put(17,"Tarea2P1");
+        nombreP.put(18,"Tarea2P2");
     }
 
     // Metodo que se le pasa el vector de disparo y actualiza la marca
@@ -46,6 +92,7 @@ public class RdP {
                 monitor.releaseMutex();
                 long actual = System.currentTimeMillis();
                 long nap = tiempoInicial[t] + alpha[t] - actual;
+                System.out.println(System.currentTimeMillis()-tinicial + ":"+"transicion t: " + t + "sin ventana. nap="+nap);
                 try {
                     Thread.sleep(nap);
                 } catch (InterruptedException e) {
@@ -74,6 +121,15 @@ public class RdP {
         }
         // CAMBIOS A CONTADORES DE TRANSICIONES TEMPORALES
         actTimeStamps();
+        System.out.println("Invariantes de plaza: ");
+        System.out.println(nombreP.get(3) + "+" + nombreP.get(9) + "=" +String.valueOf(marca[3]+marca[9]));
+        System.out.println(nombreP.get(4) + "+" + nombreP.get(10) + "=" +String.valueOf(marca[4]+marca[10]));
+        System.out.println(nombreP.get(0) + "+" + nombreP.get(5) + "=" +String.valueOf(marca[0]+marca[5]));
+        System.out.println(nombreP.get(1) + "+" + nombreP.get(6) + "=" +String.valueOf(marca[1]+marca[6]));
+        System.out.println(nombreP.get(2) + "+" + nombreP.get(11) + "=" +String.valueOf(marca[2]+marca[11]));
+        System.out.println(nombreP.get(7) + "+" + nombreP.get(12)+ "+" + nombreP.get(14)+ "+" + nombreP.get(17) + "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]));
+        System.out.println(nombreP.get(8) + "+" + nombreP.get(13)+ "+" + nombreP.get(15)+ "+" + nombreP.get(18) + "=" +String.valueOf(marca[8]+marca[13]+marca[15]+marca[18]));
+        System.out.println(nombreP.get(14) + "+" + nombreP.get(15)+ "+"  + nombreP.get(16)+ "+" + nombreP.get(17)+ "+" + nombreP.get(18)+ "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]+marca[18]));
         return 0;
     }
 
@@ -124,5 +180,9 @@ public class RdP {
         }
         marcaS += "]";
         return marcaS;
+    }
+
+    public HashMap<Integer, String> getNombreT() {
+        return nombreT;
     }
 }

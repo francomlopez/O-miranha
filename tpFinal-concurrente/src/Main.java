@@ -7,6 +7,16 @@ public class Main {
 
     public static void main(String[] args)
     {
+        /*PrintStream out = null;
+        try {
+            out = new PrintStream(
+                    new FileOutputStream("log.txt", true), false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.setOut(out);
+
+         */
         boolean endProgram = false;
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(15);
         Monitor monitor = new Monitor();
@@ -44,7 +54,7 @@ public class Main {
         }
         long tfinal = System.currentTimeMillis();
         monitor.getEstadisticas().printDatos();
-        System.out.println("Tiempo de ejecucion: "(tfinal-tinicial)/1000 + " segundos.");
+        System.out.println("Tiempo de ejecucion: " + (tfinal-tinicial)/1000 + " segundos.");
         System.exit(0);
     }
 }

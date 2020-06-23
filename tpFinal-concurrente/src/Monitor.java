@@ -7,6 +7,7 @@ public class Monitor {
     private Semaphore[] colas;
     private Politica politica;
     private Estadisticas estadisticas;
+    private long tinicial;
 
 
     public Monitor() {
@@ -17,7 +18,8 @@ public class Monitor {
             colas[i] = new Semaphore(0);
         }
         politica = new Politica(red);
-        estadisticas = new Estadisticas();
+        estadisticas = new Estadisticas(red.getNombreT());
+        tinicial = System.currentTimeMillis();
     }
 
     public boolean disparar(int t){
@@ -26,10 +28,11 @@ public class Monitor {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        System.out.println(System.currentTimeMillis()-tinicial + ":"+"se intenta t: " + t);
         int seDispara = red.dispararTransicion(t);  // en dispararTransicion falta implementar el tiempo
 
         if(seDispara == 0){
+            System.out.println(System.currentTimeMillis()-tinicial + ":"+"disparo exitoso de t: " + t);
             int[] tHabs = red.tHabilitadas();
             int[] esperando = hayAlguien();
 
@@ -43,6 +46,7 @@ public class Monitor {
             mutex.release();
         }
         else if(seDispara == 1){
+            System.out.println(System.currentTimeMillis()-tinicial + ":"+"transicion t: " + t + "no habilitada");
             mutex.release();
             try {
                 colas[t].acquire();
