@@ -37,7 +37,7 @@ public class RdP {
         temporales = new boolean[]{true,false,false,false,false,true,true,true,true,false,false,false,false,true,true,true,true};
         tiempoInicial = new long[]{0,-1,-1,-1,-1,0,0,0,0,-1,-1,-1,-1,0,0,0,0};
         alpha = new long[]{50,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,500,500};
-        beta = 300000;
+        beta = 30000;
         actTimeStamps();
         tinicial = System.currentTimeMillis();
         nombreT = new HashMap<>();
@@ -121,7 +121,7 @@ public class RdP {
         }
         // CAMBIOS A CONTADORES DE TRANSICIONES TEMPORALES
         actTimeStamps();
-        System.out.println("Invariantes de plaza: ");
+        /*System.out.println("Invariantes de plaza: ");
         System.out.println(nombreP.get(3) + "+" + nombreP.get(9) + "=" +String.valueOf(marca[3]+marca[9]));
         System.out.println(nombreP.get(4) + "+" + nombreP.get(10) + "=" +String.valueOf(marca[4]+marca[10]));
         System.out.println(nombreP.get(0) + "+" + nombreP.get(5) + "=" +String.valueOf(marca[0]+marca[5]));
@@ -130,6 +130,7 @@ public class RdP {
         System.out.println(nombreP.get(7) + "+" + nombreP.get(12)+ "+" + nombreP.get(14)+ "+" + nombreP.get(17) + "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]));
         System.out.println(nombreP.get(8) + "+" + nombreP.get(13)+ "+" + nombreP.get(15)+ "+" + nombreP.get(18) + "=" +String.valueOf(marca[8]+marca[13]+marca[15]+marca[18]));
         System.out.println(nombreP.get(14) + "+" + nombreP.get(15)+ "+"  + nombreP.get(16)+ "+" + nombreP.get(17)+ "+" + nombreP.get(18)+ "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]+marca[18]));
+        */
         return 0;
     }
 

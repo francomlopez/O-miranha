@@ -15,8 +15,8 @@ public class Main {
             e.printStackTrace();
         }
         System.setOut(out);
-
          */
+
         boolean endProgram = false;
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(15);
         Monitor monitor = new Monitor();

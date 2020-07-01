@@ -28,7 +28,6 @@ public class Monitor {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(System.currentTimeMillis()-tinicial + ":"+"se intenta t: " + t);
         int seDispara = red.dispararTransicion(t);  // en dispararTransicion falta implementar el tiempo
 
         if(seDispara == 0){
@@ -40,13 +39,16 @@ public class Monitor {
             for(int i = 0; i < red.getCantTransiciones(); i++){
                 disponible[i] = tHabs[i]*esperando[i];
             }
-            int cual = politica.cualDespierto(disponible);
-            if(cual != -1){colas[cual].release();} // Despertamos al hilo que estaba en la cola para que intente nuevamente disparar
+            int[] cuales = politica.cualDespierto(disponible);
+            for(int i = 0; i < cuales.length; i++){
+                if(cuales[i] == 1){
+                    colas[i].release();
+                }
+            }
             estadisticas.seDisparo(t);
             mutex.release();
         }
         else if(seDispara == 1){
-            System.out.println(System.currentTimeMillis()-tinicial + ":"+"transicion t: " + t + "no habilitada");
             mutex.release();
             try {
                 colas[t].acquire();
