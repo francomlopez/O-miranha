@@ -77,13 +77,6 @@ public class Politica {
             c[14] = 0;
             c[6] = 0;
         }
-
-        /*if(c[7] == 1){return 7;}
-        if(c[8] == 1){return 8;}
-        if(c[0] == 1){return 0;}
-        if(c[15] == 1){return 15;}
-        if(c[16] == 1){return 16;}
-         */
         return c;
     }
 

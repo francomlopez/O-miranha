@@ -31,7 +31,7 @@ public class Monitor {
         int seDispara = red.dispararTransicion(t);  // en dispararTransicion falta implementar el tiempo
 
         if(seDispara == 0){
-            System.out.println(System.currentTimeMillis()-tinicial + ":"+"disparo exitoso de t: " + t);
+            //System.out.println(System.currentTimeMillis()-tinicial + ":"+"disparo exitoso de t: " + t);
             int[] tHabs = red.tHabilitadas();
             int[] esperando = hayAlguien();
 

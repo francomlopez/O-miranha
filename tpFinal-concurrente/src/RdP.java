@@ -8,7 +8,7 @@ public class RdP {
     private long[] alpha;
     private long beta;
     private Monitor monitor;
-    private long tinicial;
+    //private long tinicial;
     private HashMap<Integer, String> nombreT;
     private HashMap<Integer, String> nombreP;
 
@@ -39,7 +39,7 @@ public class RdP {
         alpha = new long[]{50,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,500,500};
         beta = 30000;
         actTimeStamps();
-        tinicial = System.currentTimeMillis();
+        //tinicial = System.currentTimeMillis();
         nombreT = new HashMap<>();
         nombreT.put(0,"ArrivalRate");
         nombreT.put(1,"AsignaP1");
@@ -92,7 +92,7 @@ public class RdP {
                 monitor.releaseMutex();
                 long actual = System.currentTimeMillis();
                 long nap = tiempoInicial[t] + alpha[t] - actual;
-                System.out.println(System.currentTimeMillis()-tinicial + ":"+"transicion t: " + t + "sin ventana. nap="+nap);
+                //System.out.println(System.currentTimeMillis()-tinicial + ":"+"transicion t: " + t + "sin ventana. nap="+nap);
                 try {
                     Thread.sleep(nap);
                 } catch (InterruptedException e) {
@@ -121,16 +121,17 @@ public class RdP {
         }
         // CAMBIOS A CONTADORES DE TRANSICIONES TEMPORALES
         actTimeStamps();
-        /*System.out.println("Invariantes de plaza: ");
-        System.out.println(nombreP.get(3) + "+" + nombreP.get(9) + "=" +String.valueOf(marca[3]+marca[9]));
-        System.out.println(nombreP.get(4) + "+" + nombreP.get(10) + "=" +String.valueOf(marca[4]+marca[10]));
-        System.out.println(nombreP.get(0) + "+" + nombreP.get(5) + "=" +String.valueOf(marca[0]+marca[5]));
-        System.out.println(nombreP.get(1) + "+" + nombreP.get(6) + "=" +String.valueOf(marca[1]+marca[6]));
-        System.out.println(nombreP.get(2) + "+" + nombreP.get(11) + "=" +String.valueOf(marca[2]+marca[11]));
-        System.out.println(nombreP.get(7) + "+" + nombreP.get(12)+ "+" + nombreP.get(14)+ "+" + nombreP.get(17) + "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]));
-        System.out.println(nombreP.get(8) + "+" + nombreP.get(13)+ "+" + nombreP.get(15)+ "+" + nombreP.get(18) + "=" +String.valueOf(marca[8]+marca[13]+marca[15]+marca[18]));
-        System.out.println(nombreP.get(14) + "+" + nombreP.get(15)+ "+"  + nombreP.get(16)+ "+" + nombreP.get(17)+ "+" + nombreP.get(18)+ "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]+marca[18]));
-        */
+
+        // Comprobacion de invariantes de plaza
+        if(marca[3]+marca[9] != 8){System.out.println("Error en el invariante " + nombreP.get(3) + "+" + nombreP.get(9) + ". Resultado: " + nombreP.get(3) + "+" + nombreP.get(9) + "=" +String.valueOf(marca[3]+marca[9]));}
+        if(marca[4]+marca[10] != 8){System.out.println("Error en el invariante " + nombreP.get(4) + "+" + nombreP.get(10) + ". Resultado: " + nombreP.get(4) + "+" + nombreP.get(10) + "=" +String.valueOf(marca[4]+marca[10]));}
+        if(marca[0]+marca[5] != 4){System.out.println("Error en el invariante " + nombreP.get(0) + "+" + nombreP.get(5) + ". Resultado: " + nombreP.get(0) + "+" + nombreP.get(5) + "=" +String.valueOf(marca[0]+marca[5]));}
+        if(marca[1]+marca[6] != 4){System.out.println("Error en el invariante " + nombreP.get(1) + "+" + nombreP.get(6) + ". Resultado: " + nombreP.get(1) + "+" + nombreP.get(6) + "=" +String.valueOf(marca[1]+marca[6]));}
+        if(marca[2]+marca[11] != 1){System.out.println("Error en el invariante " + nombreP.get(2) + "+" + nombreP.get(11) + ". Resultado: " + nombreP.get(2) + "+" + nombreP.get(11) + "=" +String.valueOf(marca[2]+marca[11]));}
+        if(marca[7]+marca[12]+marca[14]+marca[17] != 1){System.out.println("Error en el invariante " + nombreP.get(7) + "+" + nombreP.get(12)+ "+" + nombreP.get(14)+ "+" + nombreP.get(17) + ". Resultado: " + nombreP.get(7) + "+" + nombreP.get(12)+ "+" + nombreP.get(14)+ "+" + nombreP.get(17) + "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]));}
+        if(marca[8]+marca[13]+marca[15]+marca[18] != 1){System.out.println("Error en el invariante " + nombreP.get(8) + "+" + nombreP.get(13)+ "+" + nombreP.get(15)+ "+" + nombreP.get(18) + ". Resultado: " + nombreP.get(8) + "+" + nombreP.get(13)+ "+" + nombreP.get(15)+ "+" + nombreP.get(18) + "=" +String.valueOf(marca[7]+marca[12]+marca[14]+marca[17]));}
+        if(marca[14]+marca[15]+marca[16]+marca[17]+marca[18] != 1){System.out.println("Error en el invariante " + nombreP.get(14) + "+" + nombreP.get(15)+ "+"  + nombreP.get(16)+ "+" + nombreP.get(17)+ "+" + nombreP.get(18)+". Resultado: " + nombreP.get(14) + "+" + nombreP.get(15)+ "+"  + nombreP.get(16)+ "+" + nombreP.get(17)+ "+" + nombreP.get(18)+ "=" +String.valueOf(marca[14]+marca[15]+marca[16]+marca[17]+marca[18]));}
+
         return 0;
     }
 
