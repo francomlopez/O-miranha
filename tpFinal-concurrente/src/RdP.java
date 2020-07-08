@@ -57,7 +57,7 @@ public class RdP {
         nombreT.put(13,"ProcesarT2P1");
         nombreT.put(14,"ProcesarT2P2");
         nombreT.put(15,"VaciadoM1");
-        nombreT.put(16,"VaaciadoM2");
+        nombreT.put(16,"VaciadoM2");
 
         nombreP = new HashMap<>();
         nombreP.put(0,"ColaP1");

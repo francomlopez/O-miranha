@@ -22,7 +22,7 @@ public class Estadisticas {
     }
 
     public void printDatos(){
-        System.out.println("================================================================================");
+        System.out.println("\n================================================================================");
         for(int i = 0; i < disparos.length; i++){
             System.out.println("La transicion " + nombreT.get(i) + " se disparo: " + disparos[i] + " veces.");
         }
