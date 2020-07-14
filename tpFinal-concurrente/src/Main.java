@@ -55,6 +55,7 @@ public class Main {
         long tfinal = System.currentTimeMillis();
         monitor.getEstadisticas().printDatos();
         System.out.println("Tiempo de ejecucion: " + (tfinal-tinicial)/1000 + " segundos.");
+        System.out.println("Marcado final: " + monitor.getRed().marcaToString());
         System.exit(0);
     }
 }

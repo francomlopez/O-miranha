@@ -122,7 +122,7 @@ public class RdP {
         // CAMBIOS A CONTADORES DE TRANSICIONES TEMPORALES
         actTimeStamps();
 
-        System.out.print("T" + t);
+        System.out.print("T" + t + " ");
 
         // Comprobacion de invariantes de plaza
         if(marca[3]+marca[9] != 8){System.out.println("Error en el invariante " + nombreP.get(3) + "+" + nombreP.get(9) + ". Resultado: " + nombreP.get(3) + "+" + nombreP.get(9) + "=" +String.valueOf(marca[3]+marca[9]));}
