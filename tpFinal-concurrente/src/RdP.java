@@ -16,14 +16,14 @@ public class RdP {
         incidencia = new int[][]{{0,1,0,-1,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,1,0,-1,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {1,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                                {0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,4,0},
-                                {0,0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,4},
+                                {0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,1,0},
+                                {0,0,0,0,0,0,0,0,0,0,-1,0,-1,0,0,0,1},
                                 {0,-1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,-1,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,0,0,0,1,0,1,0,-1,-1,0,0,0,0,0,0},
                                 {0,0,0,0,0,0,1,0,1,0,0,-1,-1,0,0,0,0},
-                                {0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-4,0},
-                                {0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-4},
+                                {0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-1,0},
+                                {0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,-1},
                                 {-1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                                 {0,0,0,-1,0,0,0,0,0,1,1,0,0,0,0,0,0},
                                 {0,0,0,0,-1,0,0,0,0,0,0,1,1,0,0,0,0},
@@ -36,7 +36,7 @@ public class RdP {
         marca = new int[]{0,0,0,8,8,4,4,0,0,0,0,1,1,1,0,0,1,0,0};
         temporales = new boolean[]{true,false,false,false,false,true,true,true,true,false,false,false,false,true,true,true,true};
         tiempoInicial = new long[]{0,-1,-1,-1,-1,0,0,0,0,-1,-1,-1,-1,0,0,0,0};
-        alpha = new long[]{50,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,500,500};
+        alpha = new long[]{130,-1,-1,-1,-1,50,50,50,50,-1,-1,-1,-1,150,150,250,250};
         beta = 30000;
         actTimeStamps();
         //tinicial = System.currentTimeMillis();
@@ -122,7 +122,8 @@ public class RdP {
         // CAMBIOS A CONTADORES DE TRANSICIONES TEMPORALES
         actTimeStamps();
 
-        System.out.print("T" + t + " ");
+        System.out.println("T" + t + " ");
+        System.out.println(marcaToString());
 
         // Comprobacion de invariantes de plaza
         if(marca[3]+marca[9] != 8){System.out.println("Error en el invariante " + nombreP.get(3) + "+" + nombreP.get(9) + ". Resultado: " + nombreP.get(3) + "+" + nombreP.get(9) + "=" +String.valueOf(marca[3]+marca[9]));}

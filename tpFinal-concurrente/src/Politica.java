@@ -15,6 +15,10 @@ public class Politica {
             if(red.getMarca()[0] > red.getMarca()[1]){  // si colaP1 > colaP2 (plazas)
                 return returnSoloUna(2,c);   // retorna el numero de la transicion asignaP2
             }
+            else if(red.getMarca()[0] == red.getMarca()[1]){    // si ambas procesadores tienen el mismo tama;o de cola entonces hacemos random
+                if(Math.random() > 0.5){return returnSoloUna(1,c);}
+                else {return returnSoloUna(2,c);}
+            }
             else{
                 return returnSoloUna(1,c); // retorna el numero de cualquier transicion
             }
@@ -28,6 +32,10 @@ public class Politica {
             if(red.getMarca()[3] > red.getMarca()[4]){  // si DisponibleM1 > DisponibleM2 (plazas)
                 return returnSoloUna(9,c);   // retorna el numero de la transicion P1M1
             }
+            else if(red.getMarca()[3] == red.getMarca()[4]){    // si ambas memorias tienen el mismo espacio entonces se dispara una random
+                if(Math.random() > 0.5){return returnSoloUna(9,c);}
+                else {return returnSoloUna(10,c);}
+            }
             else{
                 return returnSoloUna(10,c); // retorna el numero de transicion de P1M2
             }
@@ -38,6 +46,10 @@ public class Politica {
             // Este caso es cuando P2M1 y P2M2 estan habilitadas
             if(red.getMarca()[3] > red.getMarca()[4]){  // si DisponibleM1 > DisponibleM2 (plazas)
                 return returnSoloUna(11,c);   // retorna el numero de la transicion P2M1
+            }
+            else if(red.getMarca()[3] == red.getMarca()[4]){    // si ambas memorias tienen el mismo espacio entonces se dispara una random
+                if(Math.random() > 0.5){return returnSoloUna(11,c);}
+                else {return returnSoloUna(12,c);}
             }
             else{
                 return returnSoloUna(12,c); // retorna el numero de transicion de P2M2
