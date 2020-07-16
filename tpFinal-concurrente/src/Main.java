@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -7,7 +10,7 @@ public class Main {
 
     public static void main(String[] args)
     {
-        /*PrintStream out = null;
+        PrintStream out = null;
         try {
             out = new PrintStream(
                     new FileOutputStream("log.txt", true), false);
@@ -15,7 +18,7 @@ public class Main {
             e.printStackTrace();
         }
         System.setOut(out);
-         */
+
 
         boolean endProgram = false;
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(15);
@@ -55,6 +58,7 @@ public class Main {
         long tfinal = System.currentTimeMillis();
         monitor.getEstadisticas().printDatos();
         System.out.println("Tiempo de ejecucion: " + (tfinal-tinicial)/1000 + " segundos.");
+        System.out.println("Marcado final: " + monitor.getRed().marcaToString());
         System.exit(0);
     }
 }
