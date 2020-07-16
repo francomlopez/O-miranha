@@ -13,7 +13,7 @@ public class Main {
         PrintStream out = null;
         try {
             out = new PrintStream(
-                    new FileOutputStream("log.txt", true), false);
+                    new FileOutputStream("log.txt", false), false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
