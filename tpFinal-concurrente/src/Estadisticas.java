@@ -22,6 +22,7 @@ public class Estadisticas {
     }
 
     public void printDatos(){
+        System.out.print("-");  //caracter utilizado al final de las transiciones para parsear mas facil en python
         System.out.println("\n================================================================================");
         for(int i = 0; i < disparos.length; i++){
             System.out.println("La transicion " + nombreT.get(i) + " se disparo: " + disparos[i] + " veces.");
